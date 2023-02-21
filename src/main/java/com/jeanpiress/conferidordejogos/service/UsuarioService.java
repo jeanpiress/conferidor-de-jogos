@@ -1,6 +1,7 @@
 package com.jeanpiress.conferidordejogos.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,5 +20,10 @@ public class UsuarioService {
 
 	public List<Usuario> buscar(){
 		return usuarioRepository.findAll();
+	}
+	
+	public Usuario buscarPorId(Long id) {
+		Optional<Usuario> obj = usuarioRepository.findById(id);
+		return obj.get();
 	}
 }

@@ -1,12 +1,15 @@
 package com.jeanpiress.conferidordejogos.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -22,6 +25,9 @@ public class Usuario implements Serializable {
 	private String email;
 	private String senha;
 	
+	@OneToMany(mappedBy = "usuario")
+	private List<PacoteDeJogos> jogos = new ArrayList<>();
+	
 		
 	public Usuario() {
 		
@@ -33,7 +39,7 @@ public class Usuario implements Serializable {
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
-		
+		//this.jogos = jogos;
 		
 	}
 
@@ -69,6 +75,11 @@ public class Usuario implements Serializable {
 		this.senha = senha;
 	}
 	
+		
+	public List<PacoteDeJogos> getJogos() {
+		return jogos;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
