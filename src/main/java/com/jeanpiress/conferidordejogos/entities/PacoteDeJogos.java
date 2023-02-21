@@ -19,7 +19,7 @@ public class PacoteDeJogos implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private Long numeroConcurso;
+	private String numeroConcurso;
 		
 	@ManyToOne
 	@JoinColumn(name = "usuario_id")
@@ -29,7 +29,7 @@ public class PacoteDeJogos implements Serializable{
 		
 	}
 	
-	public PacoteDeJogos(Long id,Long numeroConcurso, Usuario usuario) {
+	public PacoteDeJogos(Long id,String numeroConcurso, Usuario usuario) {
 		super();
 		this.id = id;
 		this.numeroConcurso = numeroConcurso;
@@ -46,12 +46,12 @@ public class PacoteDeJogos implements Serializable{
 		this.id = id;
 	}
 
-	public Long getNumeroConcurso() {
+	public String getNumeroConcurso() {
 		return numeroConcurso;
 	}
 	
 
-	public void setNumeroConcurso(Long numeroConcurso) {
+	public void setNumeroConcurso(String numeroConcurso) {
 		this.numeroConcurso = numeroConcurso;
 	}
 	
