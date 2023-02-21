@@ -3,14 +3,13 @@ package com.jeanpiress.conferidordejogos.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.springframework.stereotype.Service;
-
-@Service
+@Entity
 @Table(name = "tb_usuario")
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -23,16 +22,19 @@ public class Usuario implements Serializable {
 	private String email;
 	private String senha;
 	
+		
 	public Usuario() {
 		
 	}
 	
-	public Usuario(Long id, String nome, String email, String senha) {
+    public Usuario(Long id, String nome, String email, String senha) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
+		
+		
 	}
 
 	public Long getId() {
@@ -66,7 +68,7 @@ public class Usuario implements Serializable {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -83,8 +85,5 @@ public class Usuario implements Serializable {
 		Usuario other = (Usuario) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
-	
-	
+
 }
