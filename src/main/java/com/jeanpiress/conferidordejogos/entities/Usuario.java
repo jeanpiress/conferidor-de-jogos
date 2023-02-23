@@ -29,7 +29,7 @@ public class Usuario implements Serializable {
 	
 	@OneToMany(mappedBy = "usuario")
 	@JsonIgnore
-	private List<PacoteDeJogos> jogos = new ArrayList<>();
+	private List<Jogo> jogos = new ArrayList<>();
 	
 		
 	public Usuario() {
@@ -42,8 +42,8 @@ public class Usuario implements Serializable {
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
-		//this.jogos = jogos;
 		
+	
 	}
 
 	public Long getId() {
@@ -79,7 +79,7 @@ public class Usuario implements Serializable {
 	}
 	
 		
-	public List<PacoteDeJogos> getJogos() {
+	public List<Jogo> getJogos() {
 		return jogos;
 	}
 
@@ -99,5 +99,9 @@ public class Usuario implements Serializable {
 		Usuario other = (Usuario) obj;
 		return Objects.equals(id, other.id);
 	}
+
+	
+	
+	
 
 }

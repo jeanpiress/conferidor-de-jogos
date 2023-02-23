@@ -9,28 +9,31 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jeanpiress.conferidordejogos.entities.PacoteDeJogos;
-import com.jeanpiress.conferidordejogos.service.PacoteDeJogosService;
+import com.jeanpiress.conferidordejogos.entities.Jogo;
+import com.jeanpiress.conferidordejogos.service.JogoService;
 
 @RestController
-@RequestMapping(value = "/pacotes")
-public class PacoteDeJogosResource {
+@RequestMapping(value = "/jogos")
+public class JogoResource {
 
 	@Autowired
-	private PacoteDeJogosService service;
+	private JogoService service;
 
 	
 	@GetMapping
-	public ResponseEntity<List<PacoteDeJogos>> buscar(){
-		List<PacoteDeJogos> u = service.buscar();
+	public ResponseEntity<List<Jogo>> buscar(){
+		List<Jogo> u = service.buscar();
 		return ResponseEntity.ok().body(u);
 		
 	}
 	
+	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<PacoteDeJogos> buscarPorId(@PathVariable Long id){
-			PacoteDeJogos u = service.buscarPorId(id);
+	public ResponseEntity<Jogo> buscarPorId(@PathVariable Long id){
+			Jogo u = service.buscarPorId(id);
 		return ResponseEntity.ok().body(u);
 		
 	}
+	
+	
 }

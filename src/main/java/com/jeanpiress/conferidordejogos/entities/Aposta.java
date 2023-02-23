@@ -1,6 +1,6 @@
+/*
 package com.jeanpiress.conferidordejogos.entities;
 
-import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -12,57 +12,53 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_pacoteDeJogos")
-public class PacoteDeJogos implements Serializable{
-	private static final long serialVersionUID = 1L;
+@Table(name = "tb_aposta")
+public class Aposta {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String numeroConcurso;
-		
+	private Integer numero;
+	
 	@ManyToOne
-	@JoinColumn(name = "usuario_id")
-	private Usuario usuario;
+	@JoinColumn(name = "jogo_id")
+	private Jogo jogo;
 	
-	public PacoteDeJogos() {
+	
+	
+	public Aposta() {
 		
-	}
-	
-	public PacoteDeJogos(Long id,String numeroConcurso, Usuario usuario) {
-		super();
-		this.id = id;
-		this.numeroConcurso = numeroConcurso;
-		this.usuario = usuario;
 	}
 
-	
-		
+	public Aposta(Long id, Integer numero, Jogo jogo) {
+		super();
+		this.id = id;
+		this.numero = numero;
+		this.jogo = jogo;
+	}
+
+
+
 	public Long getId() {
 		return id;
 	}
 
+
+
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	public String getNumeroConcurso() {
-		return numeroConcurso;
-	}
 	
-
-	public void setNumeroConcurso(String numeroConcurso) {
-		this.numeroConcurso = numeroConcurso;
-	}
-	
-	
-	
-	public Usuario getUsuario() {
-		return usuario;
+	public Integer getNumero() {
+		return numero;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setNumero(Integer numero) {
+		this.numero = numero;
+	}
+	
+	public Jogo getJogo() {
+		return jogo;
 	}
 
 	@Override
@@ -78,12 +74,11 @@ public class PacoteDeJogos implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		PacoteDeJogos other = (PacoteDeJogos) obj;
+		Aposta other = (Aposta) obj;
 		return Objects.equals(id, other.id);
 	}
-
-
 	
 	
 	
 }
+*/
