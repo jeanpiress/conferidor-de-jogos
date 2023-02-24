@@ -3,6 +3,7 @@ package com.jeanpiress.conferidordejogos.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,4 +35,11 @@ public class UsuarioService {
 	public void deletar(Long id) {
 		repository.deleteById(id);
 	}
+	
+	public Usuario atualizar(Long id, Usuario user) {
+		Usuario user2 = repository.getReferenceById(id);
+		BeanUtils.copyProperties(user, user2, "id");
+		 return repository.save(user2);
+	}
+	
 }
