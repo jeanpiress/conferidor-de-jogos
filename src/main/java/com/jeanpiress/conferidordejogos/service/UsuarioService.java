@@ -5,9 +5,12 @@ import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.jeanpiress.conferidordejogos.entities.Usuario;
+import com.jeanpiress.conferidordejogos.exceptionHandler.DatabaseException;
 import com.jeanpiress.conferidordejogos.exceptionHandler.ResourceNotFoundException;
 import com.jeanpiress.conferidordejogos.exceptionHandler.ResourceNotNullException;
 import com.jeanpiress.conferidordejogos.repository.UsuarioRepository;
@@ -38,13 +41,24 @@ public class UsuarioService {
 	}
 	
 	public void deletar(Long id) {
-		repository.deleteById(id);
+		try{
+			repository.deleteById(id);
+		} catch(EmptyResultDataAccessException e) {
+			throw new ResourceNotFoundException(id);
+		}catch(DataIntegrityViolationException e) {
+			throw new DatabaseException(e.getMessage());
+		}
 	}
 	
 	public Usuario atualizar(Long id, Usuario user) {
-		Usuario user2 = repository.getReferenceById(id);
-		BeanUtils.copyProperties(user, user2, "id");
-		 return repository.save(user2);
+		try{
+			Usuario user2 = repository.getReferenceById(id);
+			BeanUtils.copyProperties(user, user2, "id");
+			 return repository.save(user2);
+		}catch(RuntimeException e) {
+			throw new ResourceNotFoundException(id);
+		}
+		
 	}
 	
 }
