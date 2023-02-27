@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "tb_jogos")
@@ -21,21 +22,37 @@ public class Jogo implements Serializable{
 	private Long id;
 	private Long numeroConcurso;
 	
+	@NotNull
 	private Integer primeiro;
+	@NotNull
 	private Integer segundo;
+	@NotNull
 	private Integer terceiro;
+	@NotNull
 	private Integer quarto;
+	@NotNull
 	private Integer quinto;
+	@NotNull
 	private Integer sexto;
+	@NotNull
 	private Integer setimo;
+	@NotNull
 	private Integer oitavo;
+	@NotNull
 	private Integer nono;
+	@NotNull
 	private Integer decimo;
+	@NotNull
 	private Integer DPrimeiro;
+	@NotNull
 	private Integer DSegundo;
+	@NotNull
 	private Integer DTerceiro;
+	@NotNull
 	private Integer DQuarto;
+	@NotNull
 	private Integer DQuinto;
+	
 	private Integer DSexto;
 	private Integer DSetimo;
 	private Integer DOitavo;

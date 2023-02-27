@@ -44,7 +44,7 @@ public class JogoResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Jogo> inserir(@RequestBody Jogo jogo){
+	public ResponseEntity<Jogo> inserir(@Valid @RequestBody Jogo jogo){
 		Jogo j = service.inserir(jogo);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(j.getId()).toUri();
@@ -58,7 +58,7 @@ public class JogoResource {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Jogo> atualizar(@Valid @PathVariable Long id, @RequestBody Jogo jogo){
+	public ResponseEntity<Jogo> atualizar(@PathVariable Long id, @RequestBody Jogo jogo){
 		Jogo jogo2 = service.atualizar(id, jogo);
 		return ResponseEntity.ok().body(jogo2);
 	}

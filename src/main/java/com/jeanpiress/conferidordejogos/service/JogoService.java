@@ -1,6 +1,7 @@
 package com.jeanpiress.conferidordejogos.service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
@@ -30,15 +31,17 @@ public class JogoService {
 
 	public Jogo inserir(Jogo jogo) {
 		return repository.save(jogo);
-	}
+		}
 	
 	public void deletar(Long id) {
 		repository.deleteById(id);
+		
 	}
 	
 	public Jogo atualizar(Long id, Jogo jogo) {
 		Jogo jogo2 = repository.getReferenceById(id);
 		BeanUtils.copyProperties(jogo, jogo2, "id");
 		 return repository.save(jogo2);
-	}
+		
+    }
 }

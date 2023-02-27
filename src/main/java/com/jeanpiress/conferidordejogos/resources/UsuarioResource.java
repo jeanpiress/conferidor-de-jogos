@@ -3,6 +3,8 @@ package com.jeanpiress.conferidordejogos.resources;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -41,7 +43,7 @@ public class UsuarioResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Usuario> inserir(@RequestBody Usuario user){
+	public ResponseEntity<Usuario> inserir(@Valid @RequestBody Usuario user){
 		Usuario u = service.inserir(user);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(u.getId()).toUri();
