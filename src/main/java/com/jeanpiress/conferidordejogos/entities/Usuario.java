@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -23,9 +24,10 @@ public class Usuario implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	private String nome;
-	private String email;
-	private String senha;
+    private String email;
+    private String senha;
 	
 	@OneToMany(mappedBy = "usuario")
 	@JsonIgnore
@@ -36,9 +38,8 @@ public class Usuario implements Serializable {
 		
 	}
 	
-    public Usuario(Long id, String nome, String email, String senha) {
-		super();
-		this.id = id;
+    public Usuario(Long id, String nome, String email, String senha){
+        this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;

@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jeanpiress.conferidordejogos.entities.Usuario;
+import com.jeanpiress.conferidordejogos.exceptionHandler.ResourceNotFoundException;
+import com.jeanpiress.conferidordejogos.exceptionHandler.ResourceNotNullException;
 import com.jeanpiress.conferidordejogos.repository.UsuarioRepository;
 
 @Service
@@ -25,10 +27,13 @@ public class UsuarioService {
 	
 	public Usuario buscarPorId(Long id) {
 		Optional<Usuario> obj = repository.findById(id);
-		return obj.get();
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
 	public Usuario inserir(Usuario user) {
+		if(user.getNome() == null || user.getEmail() == null || user.getSenha() == null) {
+			throw new ResourceNotNullException();
+		}
 		return repository.save(user);
 	}
 	

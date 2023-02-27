@@ -26,4 +26,5 @@ public class JogoService {
 		Optional<Jogo> obj = repository.findById(id);
 		return obj.get();
 	}
+	
 }
