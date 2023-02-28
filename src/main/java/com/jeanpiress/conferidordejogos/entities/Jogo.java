@@ -65,7 +65,6 @@ public class Jogo implements Serializable{
 	private Usuario usuario;
 	
 	
-	
 	public Jogo() {
 		
 	}
@@ -99,6 +98,7 @@ public class Jogo implements Serializable{
 		this.DNono = dNono;
 		this.Vigesimo = vigesimo;
 		this.usuario = usuario;
+		
 	}
 
 
@@ -292,7 +292,7 @@ public class Jogo implements Serializable{
 		this.usuario = usuario;
 	}
 	
-	
+		
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
