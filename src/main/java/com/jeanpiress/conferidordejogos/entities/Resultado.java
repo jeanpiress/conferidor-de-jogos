@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "tb_resultado")
@@ -18,21 +19,37 @@ public class Resultado implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotNull
 	private Long numeroConcurso;
+	@NotNull
 	private Integer primeiroR;
+	@NotNull
 	private Integer segundoR;
+	@NotNull
 	private Integer terceiroR;
+	@NotNull
 	private Integer quartoR;
+	@NotNull
 	private Integer quintoR;
+	@NotNull
 	private Integer sextoR;
+	@NotNull
 	private Integer setimoR;
+	@NotNull
 	private Integer oitavoR;
+	@NotNull
 	private Integer nonoR;
+	@NotNull
 	private Integer decimoR;
+	@NotNull
 	private Integer dPrimeiroR;
+	@NotNull
 	private Integer dSegundoR;
+	@NotNull
 	private Integer dTerceiroR;
+	@NotNull
 	private Integer dQuartoR;
+	@NotNull
 	private Integer dQuintoR;
 	
 		
