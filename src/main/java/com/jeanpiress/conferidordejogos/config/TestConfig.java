@@ -36,7 +36,7 @@ public class TestConfig implements CommandLineRunner{
 	    
 	     
 	    Resultado r1 = new Resultado(null, 2320L, 1, 2, 3, 5, 7, 8, 9, 10, 13, 14, 16, 18, 20, 22, 23);
-	    Resultado r2 = new Resultado(null, 2320L, 1, 2, 4, 5, 7, 8, 9, 10, 13, 16, 18, 20, 22, 24, 25);
+	    Resultado r2 = new Resultado(null, 2321L, 1, 2, 4, 5, 7, 8, 9, 10, 13, 16, 18, 20, 22, 24, 25);
 	     
 	   ResultadoRepository.saveAll(Arrays.asList(r1, r2));
 	   

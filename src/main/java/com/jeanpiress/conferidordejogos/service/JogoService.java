@@ -3,6 +3,8 @@ package com.jeanpiress.conferidordejogos.service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +29,17 @@ public class JogoService {
 		Optional<Jogo> obj = repository.findById(id);
 		return obj.get();
 	}
-
+	
+	public List<Jogo> buscarPorConcurso(Long concurso) {
+		List<Jogo> obj = repository.findByNumeroConcurso(concurso);
+		if(obj.size() == 0) {
+			throw new EntityNotFoundException();
+		}
+		return obj;
+		
+	}
+	
+	
 	public Jogo inserir(Jogo jogo) {
 		return repository.save(jogo);
 		}

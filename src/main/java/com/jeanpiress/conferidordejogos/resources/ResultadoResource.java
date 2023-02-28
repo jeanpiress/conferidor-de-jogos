@@ -36,9 +36,16 @@ public class ResultadoResource {
 	}
 	
 	
-	@GetMapping(value = "/{id}")
+	@GetMapping(value = "/id/{id}")
 	public ResponseEntity<Resultado> buscarPorId(@PathVariable Long id){
 			Resultado r = service.buscarPorId(id);
+		return ResponseEntity.ok().body(r);
+		
+	}
+	
+	@GetMapping(value = "/concurso/{concurso}")
+	public ResponseEntity<Resultado> buscarPorConcurso(@PathVariable Long concurso){
+			Resultado r = service.buscarPorConsurso(concurso);
 		return ResponseEntity.ok().body(r);
 		
 	}

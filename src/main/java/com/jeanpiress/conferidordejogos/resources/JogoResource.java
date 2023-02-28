@@ -36,10 +36,17 @@ public class JogoResource {
 	}
 	
 	
-	@GetMapping(value = "/{id}")
+	@GetMapping(value = "/id/{id}")
 	public ResponseEntity<Jogo> buscarPorId(@PathVariable Long id){
 			Jogo u = service.buscarPorId(id);
 		return ResponseEntity.ok().body(u);
+		
+	}
+	
+	@GetMapping(value = "/concurso/{concurso}")
+	public ResponseEntity<List<Jogo>> buscarPorConcurso(@PathVariable Long concurso){
+			List<Jogo> jogos = service.buscarPorConcurso(concurso);
+		return ResponseEntity.ok().body(jogos);
 		
 	}
 	

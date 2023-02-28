@@ -6,4 +6,5 @@ import com.jeanpiress.conferidordejogos.entities.Resultado;
 
 public interface ResultadoRepository extends JpaRepository<Resultado, Long>{
 
+	Resultado findByNumeroConcurso(Long numeroConcurso);
 }
