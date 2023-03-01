@@ -18,6 +18,7 @@ public class ResultadoFinal implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	private Long idJogo;
 	private Long concurso;
 	private Integer acerto1;
 	private Integer acerto2;
@@ -40,11 +41,12 @@ public class ResultadoFinal implements Serializable{
 		
 	}
 	
-	public ResultadoFinal(Long id, Long concurso, Integer acerto1, Integer acerto2, Integer acerto3, Integer acerto4,
+	public ResultadoFinal(Long id, Long idJogo, Long concurso, Integer acerto1, Integer acerto2, Integer acerto3, Integer acerto4,
 			Integer acerto5, Integer acerto6, Integer acerto7, Integer acerto8, Integer acerto9, Integer acerto10,
 			Integer acerto11, Integer acerto12, Integer acerto13, Integer acerto14, Integer acerto15) {
 		super();
 		this.id = id;
+		this.idJogo = idJogo;
 		this.concurso = concurso;
 		this.acerto1 = acerto1;
 		this.acerto2 = acerto2;
@@ -63,6 +65,10 @@ public class ResultadoFinal implements Serializable{
 		this.acerto15 = acerto15;
 	}
 
+	public void setIdJogo(Long idJogo) {
+		this.idJogo = idJogo;
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -198,6 +204,12 @@ public class ResultadoFinal implements Serializable{
 	public void setAcerto15(Integer acerto15) {
 		this.acerto15 = acerto15;
 	}
+
+	public Long getIdJogo() {
+		return idJogo;
+	}
+
+	
 
 	
 
