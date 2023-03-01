@@ -60,8 +60,12 @@ public class ResultadoFinalService {
 			Integer a14 = resultadoList.stream().filter(x -> x == acerto.getDQuarto()).findFirst().orElse(null);
 			Integer a15 = resultadoList.stream().filter(x -> x == acerto.getDQuinto()).findFirst().orElse(null);
 			
+			List<Integer> listTotais = new ArrayList<>();
+			listTotais.addAll(Arrays.asList(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15));
 			
-			rf.add(new ResultadoFinal(null, acerto.getId() , acerto.getNumeroConcurso(), a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15));  	
+			Integer totais = listTotais.stream().filter(x -> x != null).map(x -> x = 1).reduce(0, (x , y) -> x + y);
+			
+			rf.add(new ResultadoFinal(null, acerto.getId() , acerto.getNumeroConcurso(), a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, totais));  	
 		}
 		
 		
