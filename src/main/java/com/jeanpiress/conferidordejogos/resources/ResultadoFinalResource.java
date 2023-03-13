@@ -19,7 +19,7 @@ public class ResultadoFinalResource {
 	@Autowired
 	private ResultadoFinalService service;
 
-	
+
 	@GetMapping(value = "/{concurso}")
 	public ResponseEntity<List<ResultadoFinal>> conferirConcurso(@PathVariable Long concurso){
 		List<ResultadoFinal> r = service.conferirConcurso(concurso);

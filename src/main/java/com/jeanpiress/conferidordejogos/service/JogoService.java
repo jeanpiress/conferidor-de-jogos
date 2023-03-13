@@ -39,7 +39,6 @@ public class JogoService {
 		
 	}
 	
-	
 	public Jogo inserir(Jogo jogo) {
 		return repository.save(jogo);
 		}

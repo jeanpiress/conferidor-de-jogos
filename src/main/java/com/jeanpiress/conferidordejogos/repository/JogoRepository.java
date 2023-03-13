@@ -10,4 +10,5 @@ public interface JogoRepository extends JpaRepository<Jogo, Long>{
 
 	
 	List<Jogo> findByNumeroConcurso(Long numeroConcurso);
+	
 }

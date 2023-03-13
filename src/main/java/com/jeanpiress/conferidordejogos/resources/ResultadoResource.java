@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,6 +37,7 @@ public class ResultadoResource {
 	}
 	
 	
+	
 	@GetMapping(value = "/id/{id}")
 	public ResponseEntity<Resultado> buscarPorId(@PathVariable Long id){
 			Resultado r = service.buscarPorId(id);
@@ -49,7 +51,7 @@ public class ResultadoResource {
 		return ResponseEntity.ok().body(r);
 		
 	}
-	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping
 	public ResponseEntity<Resultado> inserir(@Valid @RequestBody Resultado resultado){
 		Resultado r = service.inserir(resultado);
@@ -57,13 +59,13 @@ public class ResultadoResource {
 				.buildAndExpand(r.getId()).toUri();
 		return ResponseEntity.created(uri).body(r);
 	}
-	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> deletar(@PathVariable Long id){
 		service.deletar(id);
 		return ResponseEntity.noContent().build();
 	}
-	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<Resultado> atualizar(@PathVariable Long id, @RequestBody Resultado resultado){
 		Resultado resultado2 = service.atualizar(id, resultado);

@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.jeanpiress.conferidordejogos.entities.Usuario;
@@ -29,6 +30,7 @@ public class UsuarioService {
 	}
 	
 	public Usuario inserir(Usuario user) {
+		user.setSenha(new BCryptPasswordEncoder().encode(user.getSenha()));
 		return repository.save(user);
 	}
 	

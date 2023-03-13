@@ -28,6 +28,7 @@ public class JogoResource {
 	private JogoService service;
 
 	
+	
 	@GetMapping
 	public ResponseEntity<List<Jogo>> buscar(){
 		List<Jogo> u = service.buscar();
@@ -50,6 +51,7 @@ public class JogoResource {
 		
 	}
 	
+
 	@PostMapping
 	public ResponseEntity<Jogo> inserir(@Valid @RequestBody Jogo jogo){
 		Jogo j = service.inserir(jogo);

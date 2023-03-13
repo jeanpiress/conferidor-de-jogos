@@ -2,22 +2,30 @@ package com.jeanpiress.conferidordejogos.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_usuario")
-public class Usuario implements Serializable {
+public class Usuario implements UserDetails, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	
@@ -28,6 +36,7 @@ public class Usuario implements Serializable {
 	@NotNull
 	private String nome;
 	@NotNull
+	@Column(unique = true)
 	private String email;
 	@NotNull
 	private String senha;
@@ -35,6 +44,11 @@ public class Usuario implements Serializable {
 	@OneToMany(mappedBy = "usuario")
 	@JsonIgnore
 	private List<Jogo> jogos = new ArrayList<>();
+	
+	@ManyToMany
+	@JoinTable(name = "TB_USUARIOS_ROLES", joinColumns = @JoinColumn(name = "Usuario_id"),
+	inverseJoinColumns = @JoinColumn(name = "role_id"))
+	private List<Role> roles;
 	
 		
 	public Usuario() {
@@ -102,6 +116,41 @@ public class Usuario implements Serializable {
 			return false;
 		Usuario other = (Usuario) obj;
 		return Objects.equals(id, other.id);
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return this.roles;
+	}
+
+	@Override
+	public String getPassword() {
+		return this.senha;
+	}
+
+	@Override
+	public String getUsername() {
+		return this.email;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
 	}
 
 	
