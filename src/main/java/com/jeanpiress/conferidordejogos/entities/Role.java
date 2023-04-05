@@ -1,6 +1,8 @@
 package com.jeanpiress.conferidordejogos.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +11,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -29,7 +32,8 @@ public class Role implements GrantedAuthority, Serializable{
 	@Column(nullable = false, unique = true)
 	private RoleName roleName;
 	
-	
+	@ManyToMany(mappedBy = "roles")
+	List<Usuario> usuarios = new ArrayList<>();
 	
 	
 	@Override

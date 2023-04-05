@@ -18,6 +18,7 @@ public class JogoService {
 
 	@Autowired
 	private JogoRepository repository;
+	
     
 
 
@@ -34,6 +35,16 @@ public class JogoService {
 		List<Jogo> obj = repository.findByNumeroConcurso(concurso);
 		if(obj.size() == 0) {
 			throw new EntityNotFoundException();
+		}
+		return obj;
+		
+	}
+	
+	public List<Jogo> buscarPorConcursoEUsuario(Long concurso, Long usuario) {
+		
+		List<Jogo> obj = repository.buscarPorNumeroConcursoAndUsuario(concurso, usuario);
+		if(obj.size() == 0) {	
+		throw new EntityNotFoundException();
 		}
 		return obj;
 		

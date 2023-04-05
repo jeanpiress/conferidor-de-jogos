@@ -12,6 +12,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tb_jogos")
 public class Jogo implements Serializable{
@@ -62,6 +67,7 @@ public class Jogo implements Serializable{
 			
 	@ManyToOne
 	@JoinColumn(name = "usuario_id")
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private Usuario usuario;
 	
 	

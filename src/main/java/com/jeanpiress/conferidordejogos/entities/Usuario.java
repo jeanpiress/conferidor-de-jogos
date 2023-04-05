@@ -48,9 +48,11 @@ public class Usuario implements UserDetails, Serializable {
 	@ManyToMany
 	@JoinTable(name = "TB_USUARIOS_ROLES", joinColumns = @JoinColumn(name = "Usuario_id"),
 	inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private List<Role> roles;
+	private List<Role> roles = new ArrayList<>();
+	
 	
 		
+	
 	public Usuario() {
 		
 	}
@@ -99,6 +101,14 @@ public class Usuario implements UserDetails, Serializable {
 		
 	public List<Jogo> getJogos() {
 		return jogos;
+	}
+	
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
 	}
 
 	@Override
@@ -153,7 +163,6 @@ public class Usuario implements UserDetails, Serializable {
 		return true;
 	}
 
-	
 	
 	
 

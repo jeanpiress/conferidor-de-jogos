@@ -49,7 +49,14 @@ public class JogoResource {
 			List<Jogo> jogos = service.buscarPorConcurso(concurso);
 		return ResponseEntity.ok().body(jogos);
 		
-	}
+	} 
+	
+	@GetMapping(value = "/concurso/{concurso}/usuario/{usuario}")
+	public ResponseEntity<List<Jogo>> buscarPorConcursoEUsuario(@PathVariable Long concurso, @PathVariable Long usuario){
+			List<Jogo> jogos = service.buscarPorConcursoEUsuario(concurso, usuario);
+		return ResponseEntity.ok().body(jogos);
+		
+	} 
 	
 
 	@PostMapping

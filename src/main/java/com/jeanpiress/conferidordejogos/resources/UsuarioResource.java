@@ -46,6 +46,7 @@ public class UsuarioResource {
 	@PostMapping
 	public ResponseEntity<Usuario> inserir(@Valid @RequestBody Usuario user){
 		Usuario u = service.inserir(user);
+		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(u.getId()).toUri();
 		return ResponseEntity.created(uri).body(u);
@@ -60,6 +61,27 @@ public class UsuarioResource {
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<Usuario> atualizar(@PathVariable Long id, @RequestBody Usuario user){
 		Usuario user2 = service.atualizar(id, user);
+		return ResponseEntity.ok().body(user2);
+	}
+	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PutMapping(value = "/senha/{id}")
+	public ResponseEntity<Usuario> atualizarSenha(@PathVariable Long id, @RequestBody Usuario user){
+		Usuario user2 = service.atualizarSenha(id, user);
+		return ResponseEntity.ok().body(user2);
+	}
+	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PutMapping(value = "/admin/{id}")
+	public ResponseEntity<Usuario> concederAdmin(@PathVariable Long id){
+		Usuario user2 = service.concederAdmin(id);
+		return ResponseEntity.ok().body(user2);
+	}
+	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PutMapping(value = "/rebaixar/{id}")
+	public ResponseEntity<Usuario> rebaixar(@PathVariable Long id){
+		Usuario user2 = service.rebaixar(id);
 		return ResponseEntity.ok().body(user2);
 	}
 }
