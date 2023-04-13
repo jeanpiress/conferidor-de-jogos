@@ -15,4 +15,6 @@ public interface JogoRepository extends JpaRepository<Jogo, Long>{
 	@Query("select j from Jogo j where j.numeroConcurso = :numeroConcurso and j.usuario.id = :usuario")
 	List<Jogo> buscarPorNumeroConcursoAndUsuario(Long numeroConcurso, Long usuario);
 	
+	
+	
 }

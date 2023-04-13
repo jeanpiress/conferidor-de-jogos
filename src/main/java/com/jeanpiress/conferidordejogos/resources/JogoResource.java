@@ -2,6 +2,7 @@ package com.jeanpiress.conferidordejogos.resources;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.jeanpiress.conferidordejogos.dto.JogoDTO;
 import com.jeanpiress.conferidordejogos.entities.Jogo;
 import com.jeanpiress.conferidordejogos.service.JogoService;
 
@@ -30,9 +32,11 @@ public class JogoResource {
 	
 	
 	@GetMapping
-	public ResponseEntity<List<Jogo>> buscar(){
+	public ResponseEntity<List<JogoDTO>> buscar(){
 		List<Jogo> u = service.buscar();
-		return ResponseEntity.ok().body(u);
+		List<JogoDTO> listDto = u.stream().map(x -> new JogoDTO(x)).collect(Collectors.toList());
+		
+		return ResponseEntity.ok().body(listDto);
 		
 	}
 	
@@ -45,9 +49,10 @@ public class JogoResource {
 	}
 	
 	@GetMapping(value = "/concurso/{concurso}")
-	public ResponseEntity<List<Jogo>> buscarPorConcurso(@PathVariable Long concurso){
+	public ResponseEntity<List<JogoDTO>> buscarPorConcurso(@PathVariable Long concurso){
 			List<Jogo> jogos = service.buscarPorConcurso(concurso);
-		return ResponseEntity.ok().body(jogos);
+			List<JogoDTO> listDto = jogos.stream().map(x -> new JogoDTO(x)).collect(Collectors.toList());
+			return ResponseEntity.ok().body(listDto);
 		
 	} 
 	
