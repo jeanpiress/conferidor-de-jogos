@@ -38,6 +38,7 @@ public class ResultadoFinal implements Serializable{
 	
 	private Integer acertosTotais;
 	
+	private Long usuario;
 	
 	public ResultadoFinal() {
 		
@@ -45,7 +46,7 @@ public class ResultadoFinal implements Serializable{
 	
 	public ResultadoFinal(Long id, Long idJogo, Long concurso, Integer acerto1, Integer acerto2, Integer acerto3, Integer acerto4,
 			Integer acerto5, Integer acerto6, Integer acerto7, Integer acerto8, Integer acerto9, Integer acerto10,
-			Integer acerto11, Integer acerto12, Integer acerto13, Integer acerto14, Integer acerto15, Integer acertosTotais) {
+			Integer acerto11, Integer acerto12, Integer acerto13, Integer acerto14, Integer acerto15, Integer acertosTotais, Long usuario) {
 		super();
 		this.id = id;
 		this.idJogo = idJogo;
@@ -66,8 +67,10 @@ public class ResultadoFinal implements Serializable{
 		this.acerto14 = acerto14;
 		this.acerto15 = acerto15;
 		this.acertosTotais = acertosTotais;
+		this.usuario = usuario;
 	}
 
+	
 	public void setIdJogo(Long idJogo) {
 		this.idJogo = idJogo;
 	}
@@ -219,6 +222,16 @@ public class ResultadoFinal implements Serializable{
 	public void setAcertosTotais(Integer acertosTotais) {
 		this.acertosTotais = acertosTotais;
 	}
+
+	public Long getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Long usuario) {
+		this.usuario = usuario;
+	}
+	
+	
 
 	
 

@@ -31,8 +31,8 @@ public class ResultadoFinalService {
 		return finalrepository.findAll();
 	}
 	
-	public List<ResultadoFinal> conferirConcurso(Long concurso){
-		List<Jogo> jogo = jogoService.buscarPorConcurso(concurso);
+	public List<ResultadoFinal> conferirConcurso(Long concurso, Long usuario){
+		List<Jogo> jogo = jogoService.buscarPorConcursoEUsuario(concurso, usuario);
 		Resultado resultado = resultadoService.buscarPorConsurso(concurso);
 		List<Integer> resultadoList = new ArrayList<>();
 		resultadoList.addAll(Arrays.asList(resultado.getPrimeiroR(), resultado.getSegundoR(), resultado.getTerceiroR(), resultado.getQuartoR(), resultado.getQuintoR()
@@ -65,7 +65,7 @@ public class ResultadoFinalService {
 			
 			Integer totais = listTotais.stream().filter(x -> x != null).map(x -> x = 1).reduce(0, (x , y) -> x + y);
 			
-			rf.add(new ResultadoFinal(null, acerto.getId() , acerto.getNumeroConcurso(), a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, totais));  	
+			rf.add(new ResultadoFinal(null, acerto.getId() , acerto.getNumeroConcurso(), a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, totais, acerto.getUsuario().getId()));  	
 		}
 		
 		
