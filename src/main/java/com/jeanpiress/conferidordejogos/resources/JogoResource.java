@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.jeanpiress.conferidordejogos.dto.JogoDTO;
+import com.jeanpiress.conferidordejogos.dto.JogoRecebidoDTO;
 import com.jeanpiress.conferidordejogos.entities.Jogo;
 import com.jeanpiress.conferidordejogos.service.JogoService;
 
@@ -65,8 +66,9 @@ public class JogoResource {
 	
 
 	@PostMapping
-	public ResponseEntity<Jogo> inserir(@Valid @RequestBody Jogo jogo){
-		Jogo j = service.inserir(jogo);
+	public ResponseEntity<Jogo> inserir(@Valid @RequestBody JogoRecebidoDTO jogoRecebido){
+		Jogo r = service.converter(jogoRecebido);
+		Jogo j = service.inserir(r);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(j.getId()).toUri();
 		return ResponseEntity.created(uri).body(j);
