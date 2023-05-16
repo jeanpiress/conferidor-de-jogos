@@ -1,5 +1,6 @@
 package com.jeanpiress.conferidordejogos.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,6 +10,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jeanpiress.conferidordejogos.dto.ResultadoRecebidoDTO;
+import com.jeanpiress.conferidordejogos.entities.Jogo;
 import com.jeanpiress.conferidordejogos.entities.Resultado;
 import com.jeanpiress.conferidordejogos.repository.ResultadoRepository;
 
@@ -53,4 +56,29 @@ public class ResultadoService {
 		 return repository.save(resultado2);
 		
     }
+	
+	public Resultado converterResultado(ResultadoRecebidoDTO resultadoRecebido) {
+		List<String> list = resultadoRecebido.getList();
+		List<Integer> numeros = new ArrayList<>();
+		
+		for(String x: list) {
+			Integer a = Integer.parseInt(x);
+			numeros.add(a);
+		}
+		
+		Integer primeiro = numeros.get(0);	Integer segundo = numeros.get(1); Integer terceiro = numeros.get(2); 
+		Integer quarto = numeros.get(3); Integer quinto = numeros.get(4);	Integer sexto = numeros.get(5);	
+		Integer setimo = numeros.get(6); Integer oitavo = numeros.get(7); Integer nono = numeros.get(8);	
+		Integer decimo = numeros.get(9); Integer DPrimeiro = numeros.get(10); Integer DSegundo = numeros.get(11);
+		Integer DTerceiro = numeros.get(12); Integer DQuarto = numeros.get(13);	Integer DQuinto = numeros.get(14);
+		
+		
+		
+		
+		Resultado resultado = new Resultado(null, resultadoRecebido.getNumeroConcurso(), primeiro, segundo, terceiro, quarto, quinto, sexto, setimo, oitavo, nono, decimo, DPrimeiro, DSegundo,
+				DTerceiro, DQuarto, DQuinto);
+		
+	return resultado;	
+		
+	}
 }

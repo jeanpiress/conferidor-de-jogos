@@ -1,4 +1,4 @@
-package com.jeanpiress.conferidordejogos.config;
+package com.jeanpiress.conferidordejogos.security;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;

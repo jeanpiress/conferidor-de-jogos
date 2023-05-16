@@ -1,6 +1,7 @@
 package com.jeanpiress.conferidordejogos.resources;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -58,9 +59,18 @@ public class JogoResource {
 	} 
 	
 	@GetMapping(value = "/concurso/{concurso}/usuario/{usuario}")
-	public ResponseEntity<List<Jogo>> buscarPorConcursoEUsuario(@PathVariable Long concurso, @PathVariable Long usuario){
+	public ResponseEntity<List<JogoDTO>> buscarPorConcursoEUsuario(@PathVariable Long concurso, @PathVariable Long usuario){
 			List<Jogo> jogos = service.buscarPorConcursoEUsuario(concurso, usuario);
-		return ResponseEntity.ok().body(jogos);
+			List<JogoDTO> listDto = jogos.stream().map(x -> new JogoDTO(x)).collect(Collectors.toList());
+			List<Integer> numerosOrdenados = new ArrayList<>();
+			for(JogoDTO jogosDto: listDto) {
+				numerosOrdenados = jogosDto.getList();
+				numerosOrdenados = numerosOrdenados.stream().sorted()
+		                .collect(Collectors.toList());
+				jogosDto.setList(numerosOrdenados);
+			}
+			
+			return ResponseEntity.ok().body(listDto);
 		
 	} 
 	

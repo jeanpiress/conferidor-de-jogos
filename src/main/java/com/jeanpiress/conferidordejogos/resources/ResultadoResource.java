@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.jeanpiress.conferidordejogos.dto.ResultadoRecebidoDTO;
+import com.jeanpiress.conferidordejogos.dto.ResultadosDTO;
 import com.jeanpiress.conferidordejogos.entities.Resultado;
 import com.jeanpiress.conferidordejogos.service.ResultadoService;
 
@@ -46,15 +48,17 @@ public class ResultadoResource {
 	}
 	
 	@GetMapping(value = "/concurso/{concurso}")
-	public ResponseEntity<Resultado> buscarPorConcurso(@PathVariable Long concurso){
+	public ResponseEntity<ResultadosDTO> buscarPorConcurso(@PathVariable Long concurso){
 			Resultado r = service.buscarPorConsurso(concurso);
-		return ResponseEntity.ok().body(r);
+			ResultadosDTO resultadoDTO = new ResultadosDTO(r);
+		return ResponseEntity.ok().body(resultadoDTO);
 		
 	}
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping
-	public ResponseEntity<Resultado> inserir(@Valid @RequestBody Resultado resultado){
-		Resultado r = service.inserir(resultado);
+	public ResponseEntity<Resultado> inserir(@Valid @RequestBody ResultadoRecebidoDTO resultadoRecebido){
+		Resultado recebido = service.converterResultado(resultadoRecebido);
+		Resultado r = service.inserir(recebido);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(r.getId()).toUri();
 		return ResponseEntity.created(uri).body(r);
