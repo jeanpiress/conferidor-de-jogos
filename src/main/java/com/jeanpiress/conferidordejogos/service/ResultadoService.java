@@ -1,8 +1,11 @@
 package com.jeanpiress.conferidordejogos.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -10,8 +13,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jeanpiress.conferidordejogos.dto.Constancia;
 import com.jeanpiress.conferidordejogos.dto.ResultadoRecebidoDTO;
-import com.jeanpiress.conferidordejogos.entities.Jogo;
+import com.jeanpiress.conferidordejogos.dto.ResultadosDTO;
 import com.jeanpiress.conferidordejogos.entities.Resultado;
 import com.jeanpiress.conferidordejogos.repository.ResultadoRepository;
 
@@ -57,6 +61,9 @@ public class ResultadoService {
 		
     }
 	
+	
+	
+	
 	public Resultado converterResultado(ResultadoRecebidoDTO resultadoRecebido) {
 		List<String> list = resultadoRecebido.getList();
 		List<Integer> numeros = new ArrayList<>();
@@ -81,4 +88,92 @@ public class ResultadoService {
 	return resultado;	
 		
 	}
+	
+	
+	public List<ResultadosDTO> ultimosResultados(){
+		List<Resultado> r = repository.findAll();
+		List<ResultadosDTO> listDto = r.stream().map(x -> new ResultadosDTO(x)).collect(Collectors.toList());
+		
+		Long ultimo = 0L;
+		for(ResultadosDTO m: listDto) {
+			if(m.getNumeroConcurso()> ultimo) {
+				ultimo = m.getNumeroConcurso();
+			}
+		}
+		
+		
+		
+		
+		Resultado resultado = repository.findByNumeroConcurso(ultimo);
+		Resultado resultado2 = repository.findByNumeroConcurso(ultimo -1);
+		Resultado resultado3 = repository.findByNumeroConcurso(ultimo -2);
+		
+		ResultadosDTO menu = new ResultadosDTO(resultado);
+		ResultadosDTO menu2 = new ResultadosDTO(resultado2);
+		ResultadosDTO menu3 = new ResultadosDTO(resultado3);
+		
+		List<ResultadosDTO> menuList = new ArrayList<>();
+		
+		
+		menuList.addAll(Arrays.asList(menu, menu2, menu3 ));
+		
+		return menuList;
+	}
+	
+	public Constancia constancia(){
+		List<ResultadosDTO> listResultados = ultimosResultados();
+		
+		Constancia menuDto = new Constancia() ;
+		
+		List<Integer> possiveis = IntStream.rangeClosed(1, 25).boxed().collect(Collectors.toList());
+		List<Integer> repetido = new ArrayList<>();
+		List<Integer> naoRepete= new ArrayList<>();
+		
+		
+		ResultadosDTO resultado = listResultados.get(0);
+		ResultadosDTO resultado2 = listResultados.get(1);
+		ResultadosDTO resultado3 = listResultados.get(2);
+		
+
+		
+		for(Integer p: possiveis) {
+			if(resultado.getList().contains(p) 
+					&& resultado2.getList().contains(p)
+					&& resultado3.getList().contains(p)) {
+				
+				repetido.add(p);
+			}
+		}
+		
+		for(Integer p: possiveis) {
+			if(resultado.getList().contains(p) == false
+					&& resultado2.getList().contains(p) == false
+					&& resultado3.getList().contains(p) == false) {
+				
+				naoRepete.add(p);
+			}
+		}
+		
+		menuDto.setNumerosNaoRepetidos(naoRepete);
+		menuDto.setNumerosRepetidos(repetido);
+		
+		
+		
+		return menuDto;
+	}
+	
+	public List<ResultadosDTO> ordenarListaResultado(List<ResultadosDTO> resultados) {
+		List<Integer> listaOrdenada = new ArrayList<>();
+		for(ResultadosDTO r: resultados) {
+			listaOrdenada = r.getList().stream().sorted().collect(Collectors.toList());
+			r.setList(listaOrdenada);
+		}
+		return resultados;
+		
+		
+	}
+	
+	
+	
+	
 }

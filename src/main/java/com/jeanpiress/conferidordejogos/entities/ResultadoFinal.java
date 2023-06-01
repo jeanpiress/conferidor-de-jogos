@@ -35,6 +35,13 @@ public class ResultadoFinal implements Serializable{
 	private Integer acerto13;
 	private Integer acerto14;
 	private Integer acerto15;
+	private Integer acerto16;
+	private Integer acerto17;
+	private Integer acerto18;
+	private Integer acerto19;
+	private Integer acerto20;
+	
+	
 	
 	private Integer acertosTotais;
 	
@@ -46,7 +53,8 @@ public class ResultadoFinal implements Serializable{
 	
 	public ResultadoFinal(Long id, Long idJogo, Long concurso, Integer acerto1, Integer acerto2, Integer acerto3, Integer acerto4,
 			Integer acerto5, Integer acerto6, Integer acerto7, Integer acerto8, Integer acerto9, Integer acerto10,
-			Integer acerto11, Integer acerto12, Integer acerto13, Integer acerto14, Integer acerto15, Integer acertosTotais, Long usuario) {
+			Integer acerto11, Integer acerto12, Integer acerto13, Integer acerto14, Integer acerto15, Integer acerto16, Integer acerto17,
+			Integer acerto18, Integer acerto19, Integer acerto20, Integer acertosTotais, Long usuario) {
 		super();
 		this.id = id;
 		this.idJogo = idJogo;
@@ -66,6 +74,11 @@ public class ResultadoFinal implements Serializable{
 		this.acerto13 = acerto13;
 		this.acerto14 = acerto14;
 		this.acerto15 = acerto15;
+		this.acerto16 = acerto16;
+		this.acerto17 = acerto17;
+		this.acerto18 = acerto18;
+		this.acerto19 = acerto19;
+		this.acerto20 = acerto20;
 		this.acertosTotais = acertosTotais;
 		this.usuario = usuario;
 	}
@@ -209,6 +222,47 @@ public class ResultadoFinal implements Serializable{
 
 	public void setAcerto15(Integer acerto15) {
 		this.acerto15 = acerto15;
+	}
+
+	
+	public Integer getAcerto16() {
+		return acerto16;
+	}
+
+	public void setAcerto16(Integer acerto16) {
+		this.acerto16 = acerto16;
+	}
+
+	public Integer getAcerto17() {
+		return acerto17;
+	}
+
+	public void setAcerto17(Integer acerto17) {
+		this.acerto17 = acerto17;
+	}
+
+	public Integer getAcerto18() {
+		return acerto18;
+	}
+
+	public void setAcerto18(Integer acerto18) {
+		this.acerto18 = acerto18;
+	}
+
+	public Integer getAcerto19() {
+		return acerto19;
+	}
+
+	public void setAcerto19(Integer acerto19) {
+		this.acerto19 = acerto19;
+	}
+
+	public Integer getAcerto20() {
+		return acerto20;
+	}
+
+	public void setAcerto20(Integer acerto20) {
+		this.acerto20 = acerto20;
 	}
 
 	public Long getIdJogo() {

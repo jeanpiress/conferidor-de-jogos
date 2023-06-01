@@ -37,6 +37,12 @@ public class UsuarioService {
 		return obj.get();
 	}
 	
+	public Usuario buscarPorEmail(String email) {
+		Optional<Usuario> obj = repository.findByEmail(email);
+		return obj.get();
+	}
+
+	
 	public Usuario inserir(Usuario user) {
 		try {
 		Optional<Role> roleUser = roleRepository.findById(2L);

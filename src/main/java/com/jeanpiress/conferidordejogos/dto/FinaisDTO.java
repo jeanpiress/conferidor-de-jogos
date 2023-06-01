@@ -31,7 +31,8 @@ public class FinaisDTO implements Serializable {
 		
 		list.addAll(Arrays.asList(obj.getAcerto1(), obj.getAcerto2(), obj.getAcerto3(), obj.getAcerto4(), obj.getAcerto5(), 
 				obj.getAcerto6(), obj.getAcerto7(), obj.getAcerto8(), obj.getAcerto9(), obj.getAcerto10(), obj.getAcerto11(),
-				obj.getAcerto12(), obj.getAcerto13(), obj.getAcerto14(), obj.getAcerto15()));
+				obj.getAcerto12(), obj.getAcerto13(), obj.getAcerto14(), obj.getAcerto15(), obj.getAcerto16(), obj.getAcerto17(),
+				obj.getAcerto18(), obj.getAcerto19(), obj.getAcerto20()));
 		
 		list = list.stream().filter(x -> x != null).collect(Collectors.toList());
 		

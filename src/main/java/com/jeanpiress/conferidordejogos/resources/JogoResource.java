@@ -84,6 +84,14 @@ public class JogoResource {
 		return ResponseEntity.created(uri).body(j);
 	}
 	
+	@PostMapping(value = "/base/{concursoBase}/espelho/{concursoEspelho}/usuario/{usuario}")
+	public ResponseEntity<List<Jogo>> inserirEspelho(@PathVariable Long concursoBase, @PathVariable Long concursoEspelho, @PathVariable Long usuario){
+		List<Jogo> espelho = service.espelharJogo(concursoBase, concursoEspelho, usuario);
+		
+		return ResponseEntity.ok().body(espelho);
+	}
+	
+	
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> deletar(@PathVariable Long id){
 		service.deletar(id);

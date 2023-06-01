@@ -1,7 +1,10 @@
 package com.jeanpiress.conferidordejogos.resources;
 
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.jeanpiress.conferidordejogos.dto.Constancia;
 import com.jeanpiress.conferidordejogos.dto.ResultadoRecebidoDTO;
 import com.jeanpiress.conferidordejogos.dto.ResultadosDTO;
 import com.jeanpiress.conferidordejogos.entities.Resultado;
@@ -35,6 +39,23 @@ public class ResultadoResource {
 	public ResponseEntity<List<Resultado>> buscar(){
 		List<Resultado> r = service.buscar();
 		return ResponseEntity.ok().body(r);
+		
+	}
+	
+	@GetMapping(value = "/ultimosResultados")
+	public ResponseEntity<List<ResultadosDTO>> ultimosResultados(){
+		List<ResultadosDTO> menuList = service.ultimosResultados();
+		menuList = service.ordenarListaResultado(menuList);
+		
+		return ResponseEntity.ok().body(menuList);
+		
+	}
+	
+	@GetMapping(value = "/constancia")
+	public ResponseEntity<Constancia> constancia(){
+		Constancia menuDto = service.constancia();
+		
+		return ResponseEntity.ok().body(menuDto);
 		
 	}
 	

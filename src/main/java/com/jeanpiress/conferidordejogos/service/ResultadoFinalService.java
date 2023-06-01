@@ -3,6 +3,7 @@ package com.jeanpiress.conferidordejogos.service;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,7 +33,7 @@ public class ResultadoFinalService {
 	}
 	
 	public List<ResultadoFinal> conferirConcurso(Long concurso, Long usuario){
-		List<Jogo> jogo = jogoService.buscarPorConcursoEUsuario(concurso, usuario);
+		List<Jogo> jogos = jogoService.buscarPorConcursoEUsuario(concurso, usuario);
 		Resultado resultado = resultadoService.buscarPorConsurso(concurso);
 		List<Integer> resultadoList = new ArrayList<>();
 		resultadoList.addAll(Arrays.asList(resultado.getPrimeiroR(), resultado.getSegundoR(), resultado.getTerceiroR(), resultado.getQuartoR(), resultado.getQuintoR()
@@ -43,7 +44,7 @@ public class ResultadoFinalService {
 	
 		
 				
-		for(Jogo acerto: jogo) {
+		for(Jogo acerto: jogos) {
 			Integer a1 = resultadoList.stream().filter(x -> x == acerto.getPrimeiro()).findFirst().orElse(null);
 			Integer a2 = resultadoList.stream().filter(x -> x == acerto.getSegundo()).findFirst().orElse(null);
 			Integer a3 = resultadoList.stream().filter(x -> x == acerto.getTerceiro()).findFirst().orElse(null);
@@ -59,13 +60,24 @@ public class ResultadoFinalService {
 			Integer a13 = resultadoList.stream().filter(x -> x == acerto.getDTerceiro()).findFirst().orElse(null);
 			Integer a14 = resultadoList.stream().filter(x -> x == acerto.getDQuarto()).findFirst().orElse(null);
 			Integer a15 = resultadoList.stream().filter(x -> x == acerto.getDQuinto()).findFirst().orElse(null);
+			Integer a16 = resultadoList.stream().filter(x -> x == acerto.getDSexto()).findFirst().orElse(null);
+			Integer a17 = resultadoList.stream().filter(x -> x == acerto.getDSetimo()).findFirst().orElse(null);
+			Integer a18 = resultadoList.stream().filter(x -> x == acerto.getDOitavo()).findFirst().orElse(null);
+			Integer a19 = resultadoList.stream().filter(x -> x == acerto.getDNono()).findFirst().orElse(null);
+			Integer a20 = resultadoList.stream().filter(x -> x == acerto.getVigesimo()).findFirst().orElse(null);
 			
 			List<Integer> listTotais = new ArrayList<>();
-			listTotais.addAll(Arrays.asList(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15));
+			listTotais.addAll(Arrays.asList(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20));
+			List<Integer> validos = new ArrayList<>();
+			validos = listTotais.stream().filter(x -> x != null).collect(Collectors.toList());
+			Integer totais = validos.size();
 			
-			Integer totais = listTotais.stream().filter(x -> x != null).map(x -> x = 1).reduce(0, (x , y) -> x + y);
+					
+				
 			
-			rf.add(new ResultadoFinal(null, acerto.getId() , acerto.getNumeroConcurso(), a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, totais, acerto.getUsuario().getId()));  	
+			
+			rf.add(new ResultadoFinal(null, acerto.getId() , acerto.getNumeroConcurso(), a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15,
+					a16, a17, a18, a19, a20, totais, acerto.getUsuario().getId()));  	
 		}
 		
 		
