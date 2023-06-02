@@ -26,7 +26,7 @@ public class CorsFilter implements Filter {
 	private ApiProperty apiProperty;
 	
 	
-	private String originPermitida = "https://conferidor-de-jogos-ui-production.up.railway.app"; 
+	private String originPermitida = "*"; 
 	
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
