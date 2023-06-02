@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class ApiProperty {
 
 	
-	private String originPermitida = "http://localhost:4200";
+	private String originPermitida = "https://conferidor-de-jogos-ui-production.up.railway.app";
 
 	private final Seguranca seguranca = new Seguranca();
 
