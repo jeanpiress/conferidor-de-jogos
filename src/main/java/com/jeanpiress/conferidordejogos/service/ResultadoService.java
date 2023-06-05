@@ -95,10 +95,12 @@ public class ResultadoService {
 		List<ResultadosDTO> listDto = r.stream().map(x -> new ResultadosDTO(x)).collect(Collectors.toList());
 		
 		Long ultimo = 0L;
+		
 		for(ResultadosDTO m: listDto) {
 			if(m.getNumeroConcurso()> ultimo) {
 				ultimo = m.getNumeroConcurso();
 			}
+			
 		}
 		
 		
@@ -107,15 +109,17 @@ public class ResultadoService {
 		Resultado resultado = repository.findByNumeroConcurso(ultimo);
 		Resultado resultado2 = repository.findByNumeroConcurso(ultimo -1);
 		Resultado resultado3 = repository.findByNumeroConcurso(ultimo -2);
+		Resultado resultado4 = repository.findByNumeroConcurso(ultimo -3);
 		
 		ResultadosDTO menu = new ResultadosDTO(resultado);
 		ResultadosDTO menu2 = new ResultadosDTO(resultado2);
 		ResultadosDTO menu3 = new ResultadosDTO(resultado3);
+		ResultadosDTO menu4 = new ResultadosDTO(resultado4);
 		
 		List<ResultadosDTO> menuList = new ArrayList<>();
 		
 		
-		menuList.addAll(Arrays.asList(menu, menu2, menu3 ));
+		menuList.addAll(Arrays.asList(menu, menu2, menu3, menu4 ));
 		
 		return menuList;
 	}
@@ -133,13 +137,16 @@ public class ResultadoService {
 		ResultadosDTO resultado = listResultados.get(0);
 		ResultadosDTO resultado2 = listResultados.get(1);
 		ResultadosDTO resultado3 = listResultados.get(2);
+		ResultadosDTO resultado4 = listResultados.get(3);
 		
 
 		
 		for(Integer p: possiveis) {
 			if(resultado.getList().contains(p) 
 					&& resultado2.getList().contains(p)
-					&& resultado3.getList().contains(p)) {
+					&& resultado3.getList().contains(p)
+					&& resultado4.getList().contains(p))
+			{
 				
 				repetido.add(p);
 			}
@@ -148,7 +155,8 @@ public class ResultadoService {
 		for(Integer p: possiveis) {
 			if(resultado.getList().contains(p) == false
 					&& resultado2.getList().contains(p) == false
-					&& resultado3.getList().contains(p) == false) {
+					&& resultado3.getList().contains(p) == false
+					&& resultado4.getList().contains(p) == false) {
 				
 				naoRepete.add(p);
 			}
