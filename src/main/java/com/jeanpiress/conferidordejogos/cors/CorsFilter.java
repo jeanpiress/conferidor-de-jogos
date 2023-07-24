@@ -27,7 +27,7 @@ public class CorsFilter implements Filter {
 	
 	//private String originPermitida = "http://localhost:4200";
 	
-	private String originPermitida = "https://conferidor-de-jogos-ui-production.up.railway.app"; 
+	private String originPermitida = "https://conferidorjogos.up.railway.app/"; 
 	
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
