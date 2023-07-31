@@ -25,6 +25,7 @@ import com.jeanpiress.conferidordejogos.dto.Constancia;
 import com.jeanpiress.conferidordejogos.dto.ResultadoRecebidoDTO;
 import com.jeanpiress.conferidordejogos.dto.ResultadosDTO;
 import com.jeanpiress.conferidordejogos.entities.Resultado;
+import com.jeanpiress.conferidordejogos.entities.ResultadoApi;
 import com.jeanpiress.conferidordejogos.service.ResultadoService;
 
 @RestController
@@ -52,7 +53,7 @@ public class ResultadoResource {
 	}
 	
 	@GetMapping(value = "/constancia")
-	public ResponseEntity<Constancia> constancia(){
+	public ResponseEntity<Constancia> constancia() throws Exception{
 		Constancia menuDto = service.constancia();
 		
 		return ResponseEntity.ok().body(menuDto);
@@ -75,6 +76,7 @@ public class ResultadoResource {
 		return ResponseEntity.ok().body(resultadoDTO);
 		
 	}
+	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping
 	public ResponseEntity<Resultado> inserir(@Valid @RequestBody ResultadoRecebidoDTO resultadoRecebido){

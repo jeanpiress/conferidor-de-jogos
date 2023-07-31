@@ -12,6 +12,8 @@ public class ConferidorDeJogosApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ConferidorDeJogosApplication.class, args);
+		
+		
 	
 		
 	}
