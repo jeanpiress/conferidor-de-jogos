@@ -203,7 +203,42 @@ public class ResultadoService {
 		return menuList;
 	}
 
-	public Constancia constancia() throws Exception {
+	public Constancia constancia3() throws Exception {
+		// verificar quais numeros apareceram e os que não apareceram nos ultimos 4
+		// concursos
+		List<ResultadosDTO> listResultados = ultimosResultados();
+
+		Constancia menuDto = new Constancia();
+
+		List<Integer> possiveis = IntStream.rangeClosed(1, 25).boxed().collect(Collectors.toList());
+		List<Integer> repetido = new ArrayList<>();
+		List<Integer> naoRepete = new ArrayList<>();
+
+		ResultadosDTO resultado = listResultados.get(0);
+		ResultadosDTO resultado2 = listResultados.get(1);
+		ResultadosDTO resultado3 = listResultados.get(2);
+		
+
+		for (Integer p : possiveis) {
+			if (resultado.getList().contains(p) && resultado2.getList().contains(p) && resultado3.getList().contains(p)) {
+				repetido.add(p);
+			}
+
+			if (resultado.getList().contains(p) == false && resultado2.getList().contains(p) == false
+					&& resultado3.getList().contains(p) == false) {
+
+				naoRepete.add(p);
+			}
+		}
+
+		menuDto.setNumerosNaoRepetidos(naoRepete);
+		menuDto.setNumerosRepetidos(repetido);
+
+		return menuDto;
+	}
+	
+	
+	public Constancia constancia4() throws Exception {
 		// inseriri novo concurso caso exita
 		inserirPorAPI();
 
