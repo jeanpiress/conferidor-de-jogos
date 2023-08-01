@@ -61,7 +61,7 @@ public class ResultadoResource {
 	}
 	
 	@GetMapping(value = "/constancia3")
-	public ResponseEntity<Constancia> constancia3() throws Exception{
+	public ResponseEntity<Constancia> constancia3(){
 		Constancia menuDto = service.constancia3();
 		
 		return ResponseEntity.ok().body(menuDto);

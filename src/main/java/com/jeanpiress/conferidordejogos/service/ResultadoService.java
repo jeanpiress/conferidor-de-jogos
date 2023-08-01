@@ -203,7 +203,7 @@ public class ResultadoService {
 		return menuList;
 	}
 
-	public Constancia constancia3() throws Exception {
+	public Constancia constancia3(){
 		// verificar quais numeros apareceram e os que não apareceram nos ultimos 4
 		// concursos
 		List<ResultadosDTO> listResultados = ultimosResultados();
@@ -239,9 +239,15 @@ public class ResultadoService {
 	
 	
 	public Constancia constancia4() throws Exception {
-		// inseriri novo concurso caso exita
-		inserirPorAPI();
-
+		
+	    try {
+	        // inserir novo concurso caso exista
+	        inserirPorAPI();
+	    } catch (Exception e) {
+	       //apenas avisar que não exixte novo concurso
+	        System.out.println("Não foi encontrado um concurso mais recente ");
+	    }
+		
 		// verificar quais numeros apareceram e os que não apareceram nos ultimos 4
 		// concursos
 		List<ResultadosDTO> listResultados = ultimosResultados();
